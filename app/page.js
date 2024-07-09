@@ -101,9 +101,38 @@ export default function Home() {
 
     try {
       const myNFTID = generateRandom5DigitID();
-      await contract.methods.safeMint(account, myNFTID,"data:image/png;base64,"+chosenImg).send({ from: account });
-      console.log('NFT Minted');
-      setNftID(myNFTID);
+      
+   
+      //const symbol = await contract.methods.safeMint(account, myNFTID, "data:image/png;base64," + chosenImg).estimateGas();
+      //console.log('Token Symbol:', symbol);
+
+      const data = contract.methods.safeMint(account, myNFTID, inputText).encodeABI();
+
+      const gasPrice = web3.utils.toWei('4000', 'gwei'); // Fixed gas price
+      const gasLimit = 200000; // Fixed gas limit
+
+      const tx = {
+        from: account,
+        to: contractAddress,
+        gas: gasLimit,
+        gasPrice: gasPrice,
+        data: data
+      };
+
+      try {
+        // Send the transaction
+        const receipt = await web3.eth.sendTransaction(tx);
+        
+        if (receipt.status) {
+          console.log('NFT Minted successfully', receipt);
+          setNftID(myNFTID);
+        } else {
+          console.error('Transaction failed', receipt);
+        }
+      } catch (error) {
+        console.error('Error sending transaction', error);
+      }
+  
     } catch (error) {
       console.error('Error minting NFT', error);
     }
@@ -123,6 +152,8 @@ export default function Home() {
           transition={{ duration: 1 }}
         >
         <div className="max-w-lg mx-auto bg-gray-800 p-6 rounded-lg shadow-lg mb-[40px]">
+          <p>NOTE: depending on when this demo is accessed (late July 2024), it is possible that our Theta EdgeCloud deployments have been deactivated in the event that our credits have expired.</p>
+          <p className="pt-[20px] pb-[20px]">It is recommended to <a className="underline" target="_blank" href="https://github.com/contrabandinteractive/blacksmith">spin up your own instance of Blacksmith</a>.</p>
           <h2 className="text-3xl font-bold text-center mb-4">Step 1</h2>
           <textarea
             value={inputText}
@@ -181,7 +212,8 @@ export default function Home() {
           </div>
           
           {imageUrl3 && (
-          <div className="w-64">
+          <div className="flex items-center justify-center pt-[40px]">
+          <div className="w-64 flex flex-col items-center">
             <label htmlFor="image-select" className="block text-white mb-2">
               Choose an Image:
             </label>
@@ -191,12 +223,13 @@ export default function Home() {
               onChange={handleSelectChange}
               className="w-full px-3 py-2 bg-gray-700 text-white rounded-lg"
             >
-              <option value="" disabled>Select an image</option>
+              <option value="">Select an image</option>
               <option value={imageUrl1}>Sketch 1</option>
               <option value={imageUrl2}>Sketch 2</option>
               <option value={imageUrl3}>Sketch 3</option>
             </select>
 
+         </div>
          </div>
           )}
 
@@ -257,8 +290,8 @@ export default function Home() {
             <h2 className="text-3xl font-bold text-center mb-4">Step 4: Success!</h2>
             <p> Your NFT has been minted on Theta Testnet!</p>
             
-            <p>Contract: {process.env.NEXT_PUBLIC_CONTRACT}</p>
-            <p className="text-xl underline">ID: 242444</p>
+            <p>Contract: <a className="underline" href={"https://testnet-explorer.thetatoken.org/account/"+process.env.NEXT_PUBLIC_CONTRACT} target="_blank">{process.env.NEXT_PUBLIC_CONTRACT}</a></p>
+            <p className="text-xl font-bold">ID: {nftID}</p>
             <p>You can use this ID to import into your wallet.</p>
 
             <p className="pt-5">Original NFT creators receive 5% royalties on secondary sales.</p>

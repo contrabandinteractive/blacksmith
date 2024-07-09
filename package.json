@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@thetalabs/theta-js": "^0.0.86",
     "crypto": "^1.0.1",
     "framer-motion": "^11.2.13",
     "next": "14.2.4",

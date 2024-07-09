@@ -12,7 +12,7 @@ export async function POST(request) {
     const apiUrl = process.env.NEXT_PUBLIC_SDAPI;
 
     const thePrompt = {
-      prompt: "A highly detailed, realistic, hand drawn sketch of "+userInput+". A single item and/or person, entirely within the frame. No color, black and white.",
+      prompt: "A highly detailed, realistic, hand drawn sketch of "+userInput+". A single item and/or person, entirely within the frame. Full body in view. No color, black and white.",
       negative_prompt: "multiple characters, cut-off",
       styles: ["realistic"],
       seed: -1,
