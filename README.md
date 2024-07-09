@@ -8,8 +8,8 @@ This is a Next.js project that requires an instance of 'Sketch to 3D' and 'Stabl
 
 You will to create the following environment variables:
 
-CONTRACT_ADDRESS=0x0...
-NEXT_PUBLIC_CONTRACT=0x0...
+CONTRACT_ADDRESS=0x1e3313d8e65e7cb091dadf23fe142cfebffc988d
+NEXT_PUBLIC_CONTRACT=0x1e3313d8e65e7cb091dadf23fe142cfebffc988d
 NEXT_PUBLIC_SKETCHTO3D_URL=https://xxxxx.onthetaedgecloud.com
 NEXT_PUBLIC_SDAPI=https://xxxxx.onthetaedgecloud.com/sdapi/v1/txt2img
 
