@@ -287,11 +287,11 @@ export default function Home() {
         >
 
           <div className="w-full max-w-3xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg mt-6 mb-[100px]">
-            <h2 className="text-3xl font-bold text-center mb-4">Step 4: Success!</h2>
-            <p> Your NFT has been minted on Theta Testnet!</p>
+            <h2 className="text-3xl font-bold text-center mb-4">Step 4: Proceed to Mint</h2>
+            <p>Be sure to confirm the transaction in MetaMask.</p>
             
             <p>Contract: <a className="underline" href={"https://testnet-explorer.thetatoken.org/account/"+process.env.NEXT_PUBLIC_CONTRACT} target="_blank">{process.env.NEXT_PUBLIC_CONTRACT}</a></p>
-            <p className="text-xl font-bold">ID: {nftID}</p>
+            <p className="text-xl font-bold"> NFT ID: {nftID}</p>
             <p>You can use this ID to import into your wallet.</p>
 
             <p className="pt-5">Original NFT creators receive 5% royalties on secondary sales.</p>
